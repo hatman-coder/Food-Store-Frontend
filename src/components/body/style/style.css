@@ -9,10 +9,14 @@
     align-items: center;
 }
 
+.div-col{
+    height: 500px;
+}
 
 
 .card{
     width: 300px;
+    max-width: 300px;
     height: 480px;
     max-height: 480px;
     min-height: 480px;

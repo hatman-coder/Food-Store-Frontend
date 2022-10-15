@@ -41,7 +41,7 @@ const Product = () => {
             <div className='row row-centered pos'>
                 {data.map((item, index) => {
                     return (
-                        <div key={index} className='col-lg-4 col-md-8 col-sm-12 text-center'>
+                        <div key={index} className='col-lg-4 col-md-8 col-sm-12 text-center' style={{maxWidth: '480px'}}>
                             <div className="card text-white  mb-3 ">
                                 <img className="card-img-top" src={item.img} alt="Unavailable"/>
                                 <div className="card-body transbox">
