@@ -8,6 +8,9 @@
     display: flex;
     align-items: center;
 }
+.divBody{
+    padding-top: 3rem;
+}
 
 .div-col{
     height: 500px;
@@ -46,6 +49,9 @@
     align-items: center;
     line-height: inherit;
 
+}
+.checkBox{
+    height: 33px;
 }
 
 .myButton{
