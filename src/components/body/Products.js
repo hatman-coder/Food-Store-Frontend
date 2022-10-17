@@ -9,7 +9,7 @@ const Product = () => {
     const [error, setError] = useState('')
     const myarray = useRef([])
 
-    // eslint-disable-next-line
+  
     const loadAllProducts = () => {
         axios.get('http://127.0.0.1:8000/product/').then((res) => {
             if (res.error) {
@@ -23,20 +23,18 @@ const Product = () => {
         })
     }
 
-    // eslint-disable-next-line
     useEffect(() => {
         loadAllProducts()
+        // eslint-disable-next-line
     }, [])
 
-
-    // eslint-disable-next-line
-    var a = []
+    
     const CheckBoxHandler = (e) => {
-        console.log(e.target.value)
+     
         myarray.current.push(e.target.value)
     }
 
-    // eslint-disable-next-line
+  
     const ButtonHandler = (e) => {
         return console.log({id: e.id, product: e.name, get_add_ones: myarray.current.join(',')})
     }
@@ -44,12 +42,11 @@ const Product = () => {
 
     return (
         <div className='container divBody'>
-            <div className='row row-centered pos'>
+            <div className='row justify-content-md-center'>
                 {data.map((item, index) => {
                     return (
-                        <div key={index} className='col-lg-4 col-md-8 col-sm-12 text-center'
-                             style={{maxWidth: '480px'}}>
-                            <div className="card text-white  mb-3 ">
+                        <div key={index} className='col-lg-4 col-md-6 col-sm-12 col-xs-12 align-self-center text-center d-flex justify-content-center'>
+                            <div className="card text-white mb-4">
                                 <img className="card-img-top" src={item.img} alt="Unavailable"/>
                                 <div className="card-body transbox">
                                     <h5 className="card-title">{item.name}</h5>
