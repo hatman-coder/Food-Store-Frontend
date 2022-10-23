@@ -36,7 +36,8 @@ const Product = () => {
 
   
     const ButtonHandler = (e) => {
-        return console.log({id: e.id, product: e.name, get_add_ones: myarray.current.join(',')})
+        console.log({id: e.id, product: e.name, get_add_ones: myarray.current.join(',')})
+        myarray.current.splice(0, myarray.current.length)
     }
 
 
