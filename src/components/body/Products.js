@@ -7,7 +7,7 @@ const Product = () => {
 
     const [data, setData] = useState([])
     const [error, setError] = useState('')
-    const myarray = useRef([])
+    const myArray = useRef([])
 
   
     const loadAllProducts = () => {
@@ -30,14 +30,19 @@ const Product = () => {
 
     
     const CheckBoxHandler = (e) => {
-     
-        myarray.current.push(e.target.value)
+        myArray.current.push(e.target.value)
     }
 
+    
   
     const ButtonHandler = (e) => {
-        console.log({id: e.id, product: e.name, get_add_ones: myarray.current.join(',')})
-        myarray.current.splice(0, myarray.current.length)
+        console.log({id: e.id, product: e.name, get_add_ones: myArray.current.join(',')})
+        localStorage.setItem('item', JSON.stringify({'id': e.id,  'product': e.name, 'get_add_ones': myArray.current}))
+        myArray.current.splice(0, myArray.current.length)
+        let get_checked_items = document.getElementsByClassName('form-check-input')
+        for(let item of get_checked_items){
+            item.checked = false
+        }   
     }
 
 
