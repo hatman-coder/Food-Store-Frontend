@@ -8,6 +8,7 @@ const Product = (props) => {
 
     const [data, setData] = useState([])
     const [error, setError] = useState('')
+    const [cartItems, setCartItems] = useState([])
     const myArray = useRef([])
   
     const loadAllProducts = () => {
@@ -30,19 +31,30 @@ const Product = (props) => {
     
     const CheckBoxHandler = (e) => {
         myArray.current.push(e.target.value)
+
     }
 
+    const halndleCart = (product) => {
+        const ProductExist = cartItems.find((item) => item.id === product.id)
+        if(ProductExist){
+            setCartItems(cartItems.map((item) => item.id === product.id ? {...ProductExist, quantity: ProductExist.quantity + 1}: item))
+        }
+        else{
+            setCartItems([...cartItems, {...product, quantity: 1}])
+        }
+ 
+    }
     
   
-    const ButtonHandler = (e) => {
-        // console.log({id: e.id, product: e.name, get_add_ones: myArray.current.join(',')})
-        localStorage.setItem('item', JSON.stringify({'id': e.id,  'product': e.name, 'get_add_ones': myArray.current}))
-        myArray.current.splice(0, myArray.current.length)
-        let get_checked_items = document.getElementsByClassName('form-check-input')
-        for(let item of get_checked_items){
-            item.checked = false
-        }   
-    }
+    // const ButtonHandler = (e) => {
+    //     console.log({id: e.id, product: e.name, get_add_ones: myArray.current.join(',')})
+    //     // localStorage.setItem('item', JSON.stringify({'id': e.id,  'product': e.name, 'get_add_ones': myArray.current}))
+    //     myArray.current.splice(0, myArray.current.length)
+    //     let get_checked_items = document.getElementsByClassName('form-check-input')
+    //     for(let item of get_checked_items){
+    //         item.checked = false
+    //     }   
+    // }
 
 
     return (
@@ -71,7 +83,7 @@ const Product = (props) => {
                                         <br></br>
                                         <br></br>
                                         <div className='card-footer'>
-                                            <button className="myButton" onClick={() => ButtonHandler(item)}>Add To Cart
+                                            <button className="myButton" onClick={() => halndleCart(item)} >Add To Cart
                                             </button>
                                         </div>
                                     </div>
