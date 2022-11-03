@@ -1,19 +1,36 @@
-import React from "react";
-import { Navbar, NavbarBrand, NavLink } from "reactstrap";
-import Cart from '../body/Cart'
+import React, { useState } from "react";
+import { Nav, Navbar, NavbarBrand, NavLink, NavItem } from "reactstrap";
+
 
 const Navigation = () => {
+    const [data, setData] = useState([])
+const get_Cart = (Cart) => {
+    var a = localStorage.getItem('item')
+    setData(a)
+    alert(data)
     return(
         <div>
-            <Navbar dark color='dark'>
-                <div className="container">
-                    <NavbarBrand href="/">
-                        Dominoz
-                    </NavbarBrand>
-                    <NavLink style={{color: 'white', display: 'block', alignContent: 'center'}} href={<Cart/>}>
-                        SignUp
-                    </NavLink>
-                </div>
+            {data}
+        </div>
+    )
+}
+
+
+    return(
+        <div>
+            <Navbar color="black">
+                <NavbarBrand href="/" style={{color: 'white'}}>
+                    Dominoz
+                </NavbarBrand>
+                <Nav>
+                    <NavItem><NavLink href="/home" style={{color: 'white'}}>Home</NavLink></NavItem>
+                    <NavItem><NavLink href="/login" style={{color: 'white'}}>Login</NavLink></NavItem>
+                    <NavItem>
+                        <NavLink  onClick={get_Cart} style={{color: 'white'}}>
+                            <i className="fa fa-shopping-cart" />
+                        </NavLink>
+                    </NavItem>
+                </Nav>
             </Navbar>
         </div>
     )

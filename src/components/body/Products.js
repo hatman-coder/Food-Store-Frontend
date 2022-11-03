@@ -3,12 +3,12 @@ import axios from "axios";
 import './style/style.css'
 
 
-const Product = () => {
+
+const Product = (props) => {
 
     const [data, setData] = useState([])
     const [error, setError] = useState('')
     const myArray = useRef([])
-
   
     const loadAllProducts = () => {
         axios.get('http://127.0.0.1:8000/product/').then((res) => {
@@ -17,12 +17,11 @@ const Product = () => {
                 console.log(error)
             } else {
                 setData(res.data)
-
             }
 
         })
     }
-
+   
     useEffect(() => {
         loadAllProducts()
         // eslint-disable-next-line
@@ -36,7 +35,7 @@ const Product = () => {
     
   
     const ButtonHandler = (e) => {
-        console.log({id: e.id, product: e.name, get_add_ones: myArray.current.join(',')})
+        // console.log({id: e.id, product: e.name, get_add_ones: myArray.current.join(',')})
         localStorage.setItem('item', JSON.stringify({'id': e.id,  'product': e.name, 'get_add_ones': myArray.current}))
         myArray.current.splice(0, myArray.current.length)
         let get_checked_items = document.getElementsByClassName('form-check-input')
@@ -49,37 +48,37 @@ const Product = () => {
     return (
         <div className='container divBody'>
             <div className='row justify-content-md-center'>
-                {data.map((item, index) => {
-                    return (
-                        <div key={index} className='col-lg-4 col-md-6 col-sm-12 col-xs-12 align-self-center text-center d-flex justify-content-center'>
-                            <div className="card text-white mb-4">
-                                <img className="card-img-top" src={item.img} alt="Unavailable"/>
-                                <div className="card-body transbox">
-                                    <h5 className="card-title">{item.name}</h5>
-                                    <p className="card-text">Price: {item.price}</p>
-                                    <div className='checkBox'>
-                                        {item.addons.map((getAddons, index) => {
-                                            return (
-                                                <div key={index} className='form-check form-check-inline'>
-                                                    <input className='form-check-input'
-                                                           onClick={CheckBoxHandler} type='checkbox' value={getAddons}
-                                                    />
-                                                    <label htmlFor='inlineCheckbox'>{getAddons}</label>
-                                                </div>
-                                            )
-                                        })}
-                                    </div>
-                                    <br></br>
-                                    <br></br>
-                                    <div className='card-footer'>
-                                        <button className="myButton" onClick={() => ButtonHandler(item)}>Add To Cart
-                                        </button>
+            {data.map((item, index) => {
+                        return (
+                            <div key={index} className='col-lg-4 col-md-6 col-sm-12 col-xs-12 align-self-center text-center d-flex justify-content-center'>
+                                <div className="card text-white mb-4">
+                                    <img className="card-img-top" src={item.img} alt="Unavailable"/>
+                                    <div className="card-body transbox">
+                                        <h5 className="card-title">{item.name}</h5>
+                                        <p className="card-text">Price: {item.price}</p>
+                                        <div className='checkBox'>
+                                            {item.addons.map((getAddons, index) => {
+                                                return (
+                                                    <div key={index} className='form-check form-check-inline'>
+                                                        <input className='form-check-input'
+                                                               onClick={CheckBoxHandler} type='checkbox' value={getAddons}
+                                                        />
+                                                        <label htmlFor='inlineCheckbox'>{getAddons}</label>
+                                                    </div>
+                                                )
+                                            })}
+                                        </div>
+                                        <br></br>
+                                        <br></br>
+                                        <div className='card-footer'>
+                                            <button className="myButton" onClick={() => ButtonHandler(item)}>Add To Cart
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    )
-                })}
+                        )
+                    })}    
             </div>
         </div>
 
