@@ -15,6 +15,15 @@ import Cart from './body/Cart';
     )
 }
 
+  const CartWrapper = () => {
+    return(
+      <div>
+        <Header/>
+        <Cart />
+      </div>
+    )
+  }
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -22,7 +31,7 @@ import Cart from './body/Cart';
     },
     {
         path: "/cart",
-        element: <Cart/>,
+        element: <CartWrapper />,
     }
   ]);
 

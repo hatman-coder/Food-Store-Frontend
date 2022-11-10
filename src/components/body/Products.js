@@ -4,11 +4,10 @@ import './style/style.css'
 
 
 
-const Product = (props) => {
+const Product = () => {
 
     const [data, setData] = useState([])
     const [error, setError] = useState('')
-    const [cartItems, setCartItems] = useState([])
     const myArray = useRef([])
   
     const loadAllProducts = () => {
@@ -34,27 +33,41 @@ const Product = (props) => {
 
     }
 
-    const halndleCart = (product) => {
-        const ProductExist = cartItems.find((item) => item.id === product.id)
-        if(ProductExist){
-            setCartItems(cartItems.map((item) => item.id === product.id ? {...ProductExist, quantity: ProductExist.quantity + 1}: item))
-        }
-        else{
-            setCartItems([...cartItems, {...product, quantity: 1}])
-        }
- 
-    }
     
   
-    // const ButtonHandler = (e) => {
-    //     console.log({id: e.id, product: e.name, get_add_ones: myArray.current.join(',')})
-    //     // localStorage.setItem('item', JSON.stringify({'id': e.id,  'product': e.name, 'get_add_ones': myArray.current}))
-    //     myArray.current.splice(0, myArray.current.length)
-    //     let get_checked_items = document.getElementsByClassName('form-check-input')
-    //     for(let item of get_checked_items){
-    //         item.checked = false
-    //     }   
-    // }
+    const ButtonHandler = (e) => {
+        // console.log({id: e.id, product: e.name, get_add_ones: myArray.current.join(',')})
+
+        let existing = localStorage.getItem("my_cart_values")
+        let existing_items
+        
+
+        if(existing !== null){
+            existing_items = JSON.parse(existing)
+        }
+        else{
+            existing_items = []
+        }
+        if(existing_items.map(item => item.id) !== e.id){
+            console.log(existing_items.map(item => item.id), e.id)
+            existing_items.push({'id': e.id,  'product': e.name, 'image': e.img, 'price': e.price, 'get_add_ones': myArray.current})
+        }
+        else{
+            console.log('if condition not fullfilled')
+            console.log(existing_items.map(item => item.id))
+        }
+       
+        localStorage.setItem("my_cart_values", JSON.stringify(existing_items))
+       
+
+    
+        myArray.current.splice(0, myArray.current.length)
+        let get_checked_items = document.getElementsByClassName('form-check-input')
+        for(let item of get_checked_items){
+            item.checked = false
+        } 
+        
+    }
 
 
     return (
@@ -83,7 +96,7 @@ const Product = (props) => {
                                         <br></br>
                                         <br></br>
                                         <div className='card-footer'>
-                                            <button className="myButton" onClick={() => halndleCart(item)} >Add To Cart
+                                            <button className="myButton" onClick={() => ButtonHandler(item)} >Add To Cart
                                             </button>
                                         </div>
                                     </div>
