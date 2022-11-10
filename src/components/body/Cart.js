@@ -47,7 +47,7 @@ const Cart = () => {
                         <tbody key={index}>
                             <tr>
                                 <td>
-                                    <img src={item.image} style={{width:'60px'}}/>
+                                    <img src={item.image} style={{width:'60px', height:'45px'}}/>
                                 </td>
                                 <td>
                                     {item.product}
@@ -59,7 +59,7 @@ const Cart = () => {
                                     <input type='number' defaultValue='1' style={{width: '70px'}}></input>
                                 </td>
                                 <td>
-                                    
+
                                 </td>
                                 <td>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
