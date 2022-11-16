@@ -3,15 +3,40 @@ import './style/cart.css'
 
 
 const Cart = () => {
+
    const [data, setData] = useState([])
-   
+
+   const Total = (e) => {
+    let price = parseInt(document.getElementById('price').innerHTML)
+    let quantity = parseInt(document.getElementById('number').innerHTML)
+    let total = price * quantity
+    let result = document.getElementById('total').innerHTML = total
+    return result
+}
+
+   const MinusHandle = (e) =>{
+
+        let number = parseInt(document.getElementById('number').innerHTML)
+        if (number !== 1){
+            number -= 1
+        }
+        document.getElementById('number').innerHTML = number  
+        Total()
+        }
+        
+
+    const PlusHandle = (e) =>{
+        let number = parseInt(document.getElementById('number').innerHTML)
+        number += 1
+        document.getElementById('number').innerHTML = number
+        Total()
+    }
 
    useEffect(() => {
     if(data.length === 0 ){
         let get_data = JSON.parse(localStorage.getItem("my_cart_values"))
         if(get_data){
             setData(get_data)
-            console.log('if', get_data)
         }
         else{
             console.log('else', data)
@@ -19,6 +44,8 @@ const Cart = () => {
         
     }
     },[])
+
+
 
     return(
         <div className="container">
@@ -52,14 +79,17 @@ const Cart = () => {
                                 <td>
                                     {item.product}
                                 </td>
-                                <td>
+                                <td id="price">
                                     {item.price}
                                 </td>
                                 <td>
-                                    <input type='number' defaultValue='1' style={{width: '70px'}}></input>
+                                    <p id="number" >1</p>
+                                    <button id="minus" onClick={MinusHandle} value={item.id}>-</button> <span></span>
+                                    <button id="plus" onClick={PlusHandle} value={item.id}>+</button>
                                 </td>
-                                <td>
 
+                                <td id="total">
+                                    {item.price}
                                 </td>
                                 <td>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash" viewBox="0 0 16 16">

@@ -48,13 +48,17 @@ const Product = () => {
         else{
             existing_items = []
         }
-        if(existing_items.map(item => item.id) !== e.id){
-            console.log(existing_items.map(item => item.id), e.id)
+ 
+        if(existing_items.every(({id}) => id) != e.id){
+        
             existing_items.push({'id': e.id,  'product': e.name, 'image': e.img, 'price': e.price, 'get_add_ones': myArray.current})
+ 
+            console.log('if', existing_items.every(({id}) => id))
+            
         }
         else{
-            console.log('if condition not fullfilled')
-            console.log(existing_items.map(item => item.id))
+            console.log('if', existing_items.every(({id}) => id))
+            alert('This item already added in the cart')
         }
        
         localStorage.setItem("my_cart_values", JSON.stringify(existing_items))
