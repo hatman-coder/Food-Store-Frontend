@@ -73,7 +73,8 @@
 
 .myButton:hover {
     background-color: #4CAF50; /* Green */
-    color: white;
+    color: black;
+    font-weight: bold;
 }
 
 .col-sm-12{
