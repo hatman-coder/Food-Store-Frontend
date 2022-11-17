@@ -48,16 +48,13 @@ const Product = () => {
         else{
             existing_items = []
         }
- 
-        if(existing_items.every(({id}) => id) != e.id){
-        
-            existing_items.push({'id': e.id,  'product': e.name, 'image': e.img, 'price': e.price, 'get_add_ones': myArray.current})
- 
-            console.log('if', existing_items.every(({id}) => id))
+  
+        if(!existing_items.some(item => item.id === e.id)) {
             
+            existing_items.push({'id': e.id,  'product': e.name, 'image': e.img, 'price': e.price, 'get_add_ones': myArray.current})
         }
+
         else{
-            console.log('if', existing_items.every(({id}) => id))
             alert('This item already added in the cart')
         }
        
