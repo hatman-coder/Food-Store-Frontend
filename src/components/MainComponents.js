@@ -4,6 +4,7 @@ import Body from './body/Body'
 import Footer from './footer/Footer'
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Cart from './body/Cart';
+import Login from "./body/Login";
 
   const ProductWrapper = () =>{
     return(
@@ -32,7 +33,11 @@ import Cart from './body/Cart';
     {
         path: "/cart",
         element: <CartWrapper />,
-    }
+    },
+      {
+          path: "/login",
+          element: <Login/>,
+      }
   ]);
 
 
