@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import './style/cart.css'
+import Order from './Order'
 
 
 const Cart = () => {
@@ -57,6 +58,10 @@ const Cart = () => {
         localStorage.setItem('my_cart_values', JSON.stringify(filtered))
         window.location.reload()
 
+    }
+
+    const ProceedHandler = (e) => {
+        console.log(e)
     }
 
 
@@ -136,7 +141,7 @@ const Cart = () => {
 
 
                                     <td>
-                                        {item.price * item.quantity}
+                                        {item.price*item.quantity}
                                     </td>
 
                                     <td>
@@ -161,6 +166,9 @@ const Cart = () => {
                 )}
 
             </table>
+            <div style={{display: 'block' , alignItems: 'center'}}>
+                <button className="btn btn-primary"><a href="/order" style={{color: 'white'}}>Proceed</a></button>
+            </div>
         </div>
     )
 }

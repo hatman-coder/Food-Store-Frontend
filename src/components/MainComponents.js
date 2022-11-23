@@ -5,6 +5,7 @@ import Footer from './footer/Footer'
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Cart from './body/Cart';
 import Login from "./body/Login";
+import Order from './body/Order';
 
   const ProductWrapper = () =>{
     return(
@@ -37,6 +38,10 @@ import Login from "./body/Login";
       {
           path: "/login",
           element: <Login/>,
+      },
+      {
+        path: "/order",
+        element: <Order/>
       }
   ]);
 

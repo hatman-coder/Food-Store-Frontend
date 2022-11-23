@@ -1,12 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
+import UserHomepage from "./UserHomepage";
 
 const Login = () => {
 
-    const headers = {
-        'Content-Type': 'application/json;charset=UTF-8'
-    }
-
+    const [token, SetToken] = useState([])
     const Signin = (e) => {
         let email = document.getElementById('email').value
         let password = document.getElementById('password').value
@@ -16,8 +14,12 @@ const Login = () => {
 
         console.log(postObject)
         axios.post("http://127.0.0.1:8000/token/", postObject)
-            .then(res => console.log(res.data))
+            .then(res => SetToken(res.data))
             .catch(err => console.log(err))
+        
+        localStorage.setItem('jwt', JSON.stringify(token.access))
+
+        
     }
 
     return (
