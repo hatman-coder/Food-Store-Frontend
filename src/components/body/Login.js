@@ -37,16 +37,19 @@ const Login = () => {
             return (
                 <div className="container">
                     <h1>Login</h1>
-                    <div className='col-4'>
+                    <br></br>
+                    <div>
                         <input type="email" id="email"/>
-                        <label className="form-label">Email address</label>
+                        <br></br>
+                        <label>Email address</label>
                     </div>
 
-                    <div className='col-4'>
+                    <div>
                         <input type="password" id="password"/>
-                        <label className="form-label">Password</label>
+                        <br></br>
+                        <label>Password</label>
                     </div>
-                    <div className='col-4'>
+                    <div>
                         <button type="button" onClick={() => Signin()} className="btn btn-primary">Sign in</button>
                     </div>
 

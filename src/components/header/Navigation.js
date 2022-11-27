@@ -17,7 +17,7 @@ const Navigation = (login_status) => {
                         </NavbarBrand>
                         <Nav>
                             <NavItem><NavLink href="/" style={{color: 'white'}}>Home</NavLink></NavItem>
-                            <NavItem><NavLink onClick={() => Logout()}
+                            <NavItem><NavLink href='' onClick={() => Logout()}
                                               style={{color: 'white'}}>Logout</NavLink></NavItem>
                             <NavItem>
                                 <NavLink href="/cart" style={{color: 'white'}}>
