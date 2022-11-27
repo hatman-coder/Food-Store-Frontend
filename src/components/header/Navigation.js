@@ -1,19 +1,15 @@
-import { Nav, Navbar, NavbarBrand, NavLink, NavItem } from "reactstrap";
+import {Nav, Navbar, NavbarBrand, NavItem, NavLink} from "reactstrap";
 
 
 const Navigation = (login_status) => {
-    console.log(login_status)
-
     const Logout = () => {
         localStorage.removeItem('jwt')
         window.location.reload()
     }
 
     const renderHtml = () => {
-        console.log('render', login_status)
-   
-        if(login_status === true || localStorage.getItem('jwt')){
-            return(
+        if (login_status === true || localStorage.getItem('jwt')) {
+            return (
                 <>
                     <Navbar color="black">
                         <NavbarBrand href="/" style={{color: 'white'}}>
@@ -21,19 +17,19 @@ const Navigation = (login_status) => {
                         </NavbarBrand>
                         <Nav>
                             <NavItem><NavLink href="/" style={{color: 'white'}}>Home</NavLink></NavItem>
-                            <NavItem><NavLink onClick={() =>Logout()} style={{color: 'white'}}>Logout</NavLink></NavItem>
+                            <NavItem><NavLink onClick={() => Logout()}
+                                              style={{color: 'white'}}>Logout</NavLink></NavItem>
                             <NavItem>
                                 <NavLink href="/cart" style={{color: 'white'}}>
-                                    <i className="fa fa-shopping-cart" />
+                                    <i className="fa fa-shopping-cart"/>
                                 </NavLink>
                             </NavItem>
                         </Nav>
                     </Navbar>
                 </>
             )
-        }
-        else{
-            return(
+        } else {
+            return (
                 <>
                     <Navbar color="black">
                         <NavbarBrand href="/" style={{color: 'white'}}>
@@ -41,10 +37,11 @@ const Navigation = (login_status) => {
                         </NavbarBrand>
                         <Nav>
                             <NavItem><NavLink href="/" style={{color: 'white'}}>Home</NavLink></NavItem>
-                            <NavItem><NavLink href="/login" style={{color: 'white'}}>Login</NavLink></NavItem>
+                            <NavItem><NavLink href="/login" style={{color: 'white'}}
+                                              onClick={() => console.log('logging out')}>Login</NavLink></NavItem>
                             <NavItem>
                                 <NavLink href="/cart" style={{color: 'white'}}>
-                                    <i className="fa fa-shopping-cart" />
+                                    <i className="fa fa-shopping-cart"/>
                                 </NavLink>
                             </NavItem>
                         </Nav>
@@ -55,10 +52,10 @@ const Navigation = (login_status) => {
 
     }
 
-    return(
-      <>
-        {renderHtml()}
-      </>
+    return (
+        <>
+            {renderHtml()}
+        </>
     )
 }
 
