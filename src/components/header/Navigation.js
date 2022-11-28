@@ -11,7 +11,7 @@ const Navigation = (login_status) => {
         if (login_status === true || localStorage.getItem('jwt')) {
             return (
                 <>
-                    <Navbar color="black">
+                    <Navbar style={{color: 'white', backgroundColor: "#304352"}}>
                         <NavbarBrand href="/" style={{color: 'white'}}>
                             Dominoz
                         </NavbarBrand>
@@ -31,9 +31,9 @@ const Navigation = (login_status) => {
         } else {
             return (
                 <>
-                    <Navbar color="black">
-                        <NavbarBrand href="/" style={{color: 'white'}}>
-                            Dominoz
+                    <Navbar style={{color: 'white', backgroundColor: "#304352"}}>
+                        <NavbarBrand href="/" style={{color: 'whitesmoke'}}>
+                            <b>Dominoz</b>
                         </NavbarBrand>
                         <Nav>
                             <NavItem><NavLink href="/" style={{color: 'white'}}>Home</NavLink></NavItem>

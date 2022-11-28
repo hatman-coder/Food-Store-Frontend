@@ -1,44 +1,62 @@
-.container{
+.container {
     padding-top: 30px;
 }
 
-.btn1{
+table td th tr {
+    align-items: center;
+}
+
+.btn1 {
     width: 30px;
     color: black;
     background-color: #a1e2fb;
     border-radius: 5px;
 }
 
-.btn2{
+.btn2 {
     width: 30px;
     color: black;
     background-color: lightgreen;
     border-radius: 5px;
 }
 
-.btn3{
+.btn3 {
     border: white;
     width: 35px;
     height: 40px;
     border-radius: 5px;
 }
 
-.btn1:hover{
+.btn4 {
+    border: white;
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #3cb371;
+    color: unset;
+}
+
+.btn1:hover {
     background-color: #2bd1df;
     color: black;
 }
 
-.btn2:hover{
+.btn2:hover {
     background-color: #39e354;
     color: black;
 }
 
-table td th tr{
-    align-items: center;
-}
 
-
-.btn3:hover{
+.btn3:hover {
     background-color: red;
     color: white;
 }
+
+a {
+
+    text-decoration: none;
+    color: unset;
+}
+
+
+

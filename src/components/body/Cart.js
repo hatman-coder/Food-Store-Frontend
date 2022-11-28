@@ -10,13 +10,19 @@ const Cart = () => {
     const renderHtml = () => {
         if (data.length === 0) {
             return (
-                <div>
-                    <h1>Your cart is empty</h1>
+                <div className='container'>
+                    <div className="large-10 text-center large-centered columns">
+                        <img src='empty_cart.png' alt="cartImg"/>
+                    </div>
+                    <br></br><br></br><br></br>
+                    <div className="text-center large-centered columns">
+                        <h1>Your cart is empty !</h1>
+                    </div>
                 </div>
             )
         } else {
             return (
-                <div>
+                <div className='container'>
                     <table className="table">
                         <thead>
                         <tr>
@@ -93,13 +99,15 @@ const Cart = () => {
                         )}
 
                     </table>
-                    <div style={{display: 'block', alignItems: 'center'}}>
-                        <button className="btn btn-primary"><a href="/order" style={{color: 'white'}}>Proceed</a>
+                    <div className="text-center large-centered columns">
+                        <button className='btn4'>
+                            <a href='/order' style={{color: 'white', textDecoration: 'none', fontWeight: '0.5rem'}}>
+                                Proceed
+                            </a>
                         </button>
                     </div>
                 </div>
             )
-
         }
     }
 

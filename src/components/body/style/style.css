@@ -8,16 +8,17 @@
     display: flex;
     align-items: center;
 }
-.divBody{
+
+.divBody {
     padding-top: 3rem;
 }
 
-.div-col{
+.div-col {
     height: 500px;
 }
 
 
-.card{
+.card {
     width: 300px;
     max-width: 300px;
     height: 480px;
@@ -26,35 +27,36 @@
     position: relative;
 }
 
-.card-body{
-    background-color: black;
+.card-body {
+    background-color: #1b1b1b;
     height: 200px;
 }
 
-.card-text{
-    font-size:20px;
+.card-text {
+    font-size: 20px;
     font-weight: bold;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
 }
 
-.card-img-top{
+.card-img-top {
     width: 300px;
     height: 250px;
 }
 
-.card-footer{
+.card-footer {
     display: block;
     align-items: center;
     line-height: inherit;
 
 }
-.checkBox{
+
+.checkBox {
     height: 33px;
 }
 
-.myButton{
+.myButton {
 
     border: white;
     border-radius: 5px;
@@ -65,7 +67,7 @@
     width: 100px;
     text-align: center;
     font-family: sans-serif;
-    font-weight:  inherit;
+    font-weight: inherit;
     /*font-size: 16px;*/
     transition-duration: 0.4s;
     overflow: hidden;
@@ -73,11 +75,11 @@
 
 .myButton:hover {
     background-color: #4CAF50; /* Green */
-    color: black;
+    /*color: black;*/
     font-weight: bold;
 }
 
-.col-sm-12{
+.col-sm-12 {
     align-items: center;
 }
 
@@ -86,3 +88,4 @@
 /*        display: none;*/
 /*    }*/
 /*}*/
+
