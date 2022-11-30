@@ -19,7 +19,7 @@ const Login = () => {
             'password': password
         }
 
-        axios.post("http://127.0.0.1:8000/token/", postObject)
+        axios.post("http://127.0.0.1:8000/login/", postObject)
             .then(res => {
                 if (res.data.access) {
                     localStorage.setItem('jwt', res.data.access)

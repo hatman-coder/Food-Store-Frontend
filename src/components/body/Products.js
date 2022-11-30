@@ -83,7 +83,7 @@ const Product = () => {
                                 <img className="card-img-top" src={item.img} alt="Unavailable"/>
                                 <div className="card-body transbox">
                                     <h5 className="card-title">{item.name}</h5>
-                                    <p className="card-text">Price: {item.price}</p>
+                                    <p className="card-text">Price: ${item.price}</p>
                                     <div className='checkBox'>
                                         {item.addons.map((getAddons, index) => {
                                             return (

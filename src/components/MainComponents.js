@@ -26,6 +26,15 @@ import Order from './body/Order';
     )
   }
 
+  const OrderWrapper = () => {
+    return(
+      <div>
+        <Header />
+        <Order/>
+      </div>
+    )
+  }
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -41,7 +50,7 @@ import Order from './body/Order';
       },
       {
         path: "/order",
-        element: <Order/>
+        element: <OrderWrapper/>
       }
   ]);
 
