@@ -74,7 +74,7 @@ const Order = () => {
 
                 <div className="col-lg-8 col-md-6 col-sm-12 custom-col2">
                     <div className="container-fluid custom">
-                        <h1 style={{textAlign: 'center', fontSize: '20px', paddingBottom: '3rem', fontSize: '2rem'}}>Info</h1>
+                        <h1 style={{textAlign: 'center', paddingBottom: '3rem', fontSize: '2rem'}}>Info</h1>
                         <div className="form-group">
                             <input type='text' className="form-control" placeholder="Delivery Address" style={{height: '100px'}}></input>
                         </div>
