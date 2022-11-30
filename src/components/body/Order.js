@@ -29,12 +29,12 @@ const Order = () => {
 
 
     return (
-        <div className="container text-center">
-            <h1 style={{textAlign: 'center', paddingBottom: '5rem'}}>Order Summary</h1>
+        <div className="container text-center" style={{fontFamily: 'monospace'}}>
+            <h1 style={{textAlign: 'center', paddingBottom: '5rem'}}>Checkout</h1>
 
             <div className="row">
                 <div className="col-lg-4 col-md-6 col-sm-12 ">
-                        <div className="container-fluid custom-col" style={{border: '1px solid gray',backgroundColor:'wheat', paddingTop:'0%'}}>
+                        <div className="container-fluid custom-col1" style={{border: '1px solid gray',backgroundColor:'wheat', paddingTop:'0%'}}>
                         <p style={{borderBottom: '1px solid gray', color: 'black', fontSize: '2rem', paddingBottom: 'none'}}>
                             Order detail
                         </p>
@@ -72,7 +72,7 @@ const Order = () => {
                    
                 </div>
 
-                <div className="col-lg-8 col-md-6 col-sm-12 custom-col">
+                <div className="col-lg-8 col-md-6 col-sm-12 custom-col2">
                     <div className="container-fluid custom">
                         <h1 style={{textAlign: 'center', fontSize: '20px', paddingBottom: '3rem', fontSize: '2rem'}}>Info</h1>
                         <div className="form-group">
