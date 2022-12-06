@@ -16,3 +16,9 @@
     min-height: 400px;
     max-height: inherit;
 }
+
+@media (max-width: 770px) {
+    .mybody{
+        padding: 2rem 0;
+    }
+}

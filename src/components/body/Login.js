@@ -9,6 +9,7 @@ const Login = () => {
     const jwt = localStorage.getItem('jwt')
     const jwtExist = jwt === undefined
     const [loggedIn, setLoggedIn] = useState(jwtExist)
+    const [error, setError] = useState(false)
 
     const Signin = () => {
         let email = document.getElementById('emailForm').value
@@ -21,7 +22,7 @@ const Login = () => {
 
         axios.post("http://127.0.0.1:8000/login/", postObject)
             .then(res => {
-                if (res.data.access) {
+                if (res.data.access && res.data.status !== 400) {
                     localStorage.setItem('jwt', res.data.access)
                     setLoggedIn(true)
 
@@ -29,13 +30,24 @@ const Login = () => {
                     console.log('No response found')
                 }
             })
-            .catch(err => console.log(err))
+            .catch(err => 
+                {
+                    console.log('err', err)
+                    if (err){
+                        setError(true)
+                        console.log(error)
+                    }
+                    else{
+                        console.log('error', error)
+                    }
+                }
+                )
 
     }
 
 
     const renderHtml = () => {
-        if (loggedIn === false & !localStorage.getItem('jwt')) {
+        if (loggedIn === false && !localStorage.getItem('jwt')) {
             return (
                 <div className="body">
                     <div className="login-card-container">
@@ -86,7 +98,7 @@ const Login = () => {
                                             d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3"></path>
                                     </svg>
                                 </a>
-                                <a href="">
+                                <a href="#">
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                          className="icon icon-tabler icon-tabler-brand-google" width="24"
                                          height="24" viewBox="0 0 24 24" strokeWidth="3" stroke="currentColor"

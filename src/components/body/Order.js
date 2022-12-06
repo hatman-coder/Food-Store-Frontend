@@ -1,17 +1,78 @@
 import React, {useEffect, useState} from "react";
 import "./style/order.css"
+import jwt_decode from "jwt-decode";
+import axios from "axios";
+import Login from "./Login";
+
+
 
 
 const Order = () => {
 
     const [cartItem, setCartItem] = useState([])
 
+    let get_data = localStorage.getItem('jwt')
+
+    var token = get_data
+    
+    if (token){
+        var decoded = jwt_decode(token);
+    }
+    else{
+        var decoded = {
+            'user_id': null
+        }
+        console.log('Not logged in')
+    }
+    
 
     useEffect(() => {
         if (cartItem.length === 0) {
             setCartItem(JSON.parse(localStorage.getItem('my_cart_values')))
         }
     }, [])
+
+    
+    const DataHandle = () => {
+        let data = JSON.parse(localStorage.getItem('my_cart_values'))
+        
+        let dataForm = data.map(item => {
+            let product = parseInt(item.id)
+            let addOns = item.get_add_ones.toString()
+            return(
+                {
+                    "id": item.id,
+                    "user": decoded.user_id,
+                    "products": product,
+                    "customer": {
+                        "deliveryAddress": document.getElementById('deliveryAddress').value,
+                        "phone": document.getElementById('phone').value,
+                        "paymentType": document.getElementById('payment').value
+                    },
+                    "addOns": addOns,
+                    "quantity": item.quantity
+                }
+            )
+        })
+       
+        
+        if(decoded.user_id !== null && document.getElementById('phone').value !== ''){
+            for(let i=0; i<dataForm.length; i++){
+                axios.post('http://127.0.0.1:8000/order/', dataForm[i])
+                .then(res => console.log(res.data))
+                .catch(err => console.log(err))
+            }
+            
+        }
+
+        else{
+            console.log('Login First')
+        }
+            
+      
+    
+        
+    }
 
     const Total = () => {
         let x = cartItem.map(item => {
@@ -72,15 +133,15 @@ const Order = () => {
                    
                 </div>
 
-                <div className="col-lg-8 col-md-6 col-sm-12 custom-col2">
+                <div className="col-lg-8 col-md-6 col-sm-12 custom-col2 mybody">
                     <div className="container-fluid custom">
                         <h1 style={{textAlign: 'center', paddingBottom: '3rem', fontSize: '2rem'}}>Info</h1>
                         <div className="form-group">
-                            <input type='text' className="form-control" placeholder="Delivery Address" style={{height: '100px'}}></input>
+                            <input type='text' id="deliveryAddress" className="form-control" placeholder="Delivery Address" style={{height: '100px'}}></input>
                         </div>
                             &nbsp;
                         <div className="form-group">
-                            <input type='text' className="form-control" placeholder="Phone Number"></input>
+                            <input type='text' id="phone" className="form-control" placeholder="Phone Number"></input>
                         </div>
                             &nbsp;
                         <div className="form-group">
@@ -89,14 +150,14 @@ const Order = () => {
                             </label>
                             &nbsp;
                             <select name="payment-method" id="payment">
-                                <option value="bkash">Bkash</option>
-                                <option value="rocket">Rocket</option>
-                                <option value="cashOnDelivery">Cash On Delivery</option>
+                                <option value="Bkash">Bkash</option>
+                                <option value="Rocket">Rocket</option>
+                                <option value="Cash On Delivery">Cash On Delivery</option>
                             </select>
                         </div>
                         &nbsp;&nbsp;&nbsp;
                         <div className="custom-btn">
-                            <button type="button" className="btn btn-success">
+                            <button type="button" onClick={() => DataHandle()} className="btn btn-success">
                                 Confirm
                             </button>
                         </div>    
