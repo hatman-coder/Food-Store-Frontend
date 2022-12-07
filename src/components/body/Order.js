@@ -3,6 +3,8 @@ import "./style/order.css"
 import jwt_decode from "jwt-decode";
 import axios from "axios";
 import Login from "./Login";
+import OrderSummary from "../OrderSummary";
+import { redirect } from "react-router-dom";
 
 
 
@@ -10,6 +12,7 @@ import Login from "./Login";
 const Order = () => {
 
     const [cartItem, setCartItem] = useState([])
+    const [success, setSuccess] = useState(false)
 
     let get_data = localStorage.getItem('jwt')
 
@@ -56,10 +59,17 @@ const Order = () => {
         })
        
         
-        if(decoded.user_id !== null && document.getElementById('phone').value !== ''){
+        if(decoded.user_id !== null && document.getElementById('phone').value !== '' && localStorage.getItem('my_cart_value') !== undefined){
             for(let i=0; i<dataForm.length; i++){
                 axios.post('http://127.0.0.1:8000/order/', dataForm[i])
-                .then(res => console.log(res.data))
+                .then(res => {
+                    if(res.status === 201){
+                        setSuccess(true)
+                    }
+                    <OrderSummary get_id={res.data.id} />
+                    console.log('res', res)
+                    console.log('data', res.data)
+                })
                 .catch(err => console.log(err))
             }
             
@@ -88,9 +98,11 @@ const Order = () => {
 
     }
 
-
-    return (
-        <div className="container text-center" style={{fontFamily: 'monospace'}}>
+    const renderHtml = () => {
+        if(success === false){
+            return(
+                <>
+                    <div className="container text-center" style={{fontFamily: 'monospace'}}>
             <h1 style={{textAlign: 'center', paddingBottom: '5rem'}}>Checkout</h1>
 
             <div className="row">
@@ -165,6 +177,31 @@ const Order = () => {
                 </div>
             </div>
         </div>
+                </>
+            )
+        }
+
+        else{
+            // localStorage.removeItem('my_cart_values')
+            return(
+                <>
+                    <div className="text-center large-centered columns">
+                        <h1>
+                            Order complete
+                        </h1>
+                        
+                    </div>
+                </>
+            )
+       
+        }
+    }
+
+
+    return (
+        <>
+            {renderHtml()}
+        </>
     )
 }
 export default Order

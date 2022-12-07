@@ -6,6 +6,7 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Cart from './body/Cart';
 import Login from "./body/Login";
 import Order from './body/Order';
+import OrderSummary from './OrderSummary';
 
   const ProductWrapper = () =>{
     return(
@@ -35,6 +36,15 @@ import Order from './body/Order';
     )
   }
 
+  const OrderSuammaryWrapper = () => {
+    return(
+      <div>
+        <Header />
+        <OrderSummary/>
+      </div>
+    )
+  }
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -51,6 +61,10 @@ import Order from './body/Order';
       {
         path: "/order",
         element: <OrderWrapper/>
+      },
+      {
+        path: "/order/summary",
+        element: <OrderSuammaryWrapper/>
       }
   ]);
 
