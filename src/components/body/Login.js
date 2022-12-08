@@ -62,12 +62,12 @@ const Login = () => {
                             <form className="login-card-form">
                                 <div className="form-item">
                                     <span className="form-item-icon material-symbols-rounded">mail</span>
-                                    <input type="text" placeholder="Enter Email" id="emailForm"
+                                    <input type="text" autoComplete="email" placeholder="Enter Email" id="emailForm"
                                            autoFocus required/>
                                 </div>
                                 <div className="form-item">
                                     <span className="form-item-icon material-symbols-rounded">lock</span>
-                                    <input type="password" placeholder="Enter Password" id="passwordForm"
+                                    <input type="password" autoComplete="current-password" placeholder="Enter Password" id="passwordForm"
                                            required/>
                                 </div>
                                 <div className="form-item-other">
