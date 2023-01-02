@@ -27,6 +27,14 @@ import OrderSummary from './OrderSummary';
     )
   }
 
+  const LoginWrapper = () => {
+    return(
+      <div>
+        <Login/>
+      </div>
+    )
+  }
+
   const OrderWrapper = () => {
     return(
       <div>
@@ -56,7 +64,7 @@ import OrderSummary from './OrderSummary';
     },
       {
           path: "/login",
-          element: <Login/>,
+          element: <LoginWrapper/>,
       },
       {
         path: "/order",

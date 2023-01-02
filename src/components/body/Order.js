@@ -4,7 +4,7 @@ import jwt_decode from "jwt-decode";
 import axios from "axios";
 import Login from "./Login";
 import OrderSummary from "../OrderSummary";
-import { redirect } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
 
 
 
@@ -40,28 +40,31 @@ const Order = () => {
         let data = JSON.parse(localStorage.getItem('my_cart_values'))
         
         let dataForm = data.map(item => {
-            let product = parseInt(item.id)
-            let addOns = item.get_add_ones.toString()
+            let product_id = parseInt(item.id)
+            let add_ons = item.add_ons.toString()
             return(
                 {
-                    "id": item.id,
-                    "user": decoded.user_id,
-                    "products": product,
-                    "customer": {
-                        "deliveryAddress": document.getElementById('deliveryAddress').value,
-                        "phone": document.getElementById('phone').value,
-                        "paymentType": document.getElementById('payment').value
+                "order_master_id": {
+                    "customer_detail": {
+                        "delivery_address": document.getElementById('delivery_address').value,
+                        "contact_number": document.getElementById('contact_number').value,
+                        "payment_type": document.getElementById('payment_type').value,
+                        "user_id": decoded.user_id
                     },
-                    "addOns": addOns,
-                    "quantity": item.quantity
+                "user_id": decoded.user_id,
+                },
+                "price": item.price,
+                "add_ons": add_ons,
+                "quantity": item.quantity,
+                "product_id": product_id,
                 }
             )
         })
        
         
-        if(decoded.user_id !== null && document.getElementById('phone').value !== '' && localStorage.getItem('my_cart_value') !== undefined){
+        if(decoded.user_id !== null && document.getElementById('contact_number').value !== '' && localStorage.getItem('my_cart_value') !== undefined){
             for(let i=0; i<dataForm.length; i++){
-                axios.post('http://127.0.0.1:8000/order/', dataForm[i])
+                axios.post('http://127.0.0.1:8000/orderDetail/', dataForm[i])
                 .then(res => {
                     if(res.status === 201){
                         setSuccess(true)
@@ -77,6 +80,7 @@ const Order = () => {
 
         else{
             console.log('Login First')
+    
         }
             
       
@@ -149,11 +153,11 @@ const Order = () => {
                     <div className="container-fluid custom">
                         <h1 style={{textAlign: 'center', paddingBottom: '3rem', fontSize: '2rem'}}>Info</h1>
                         <div className="form-group">
-                            <input type='text' id="deliveryAddress" className="form-control" placeholder="Delivery Address" style={{height: '100px'}}></input>
+                            <input type='text' id="delivery_address" className="form-control" placeholder="Delivery Address" style={{height: '100px'}}></input>
                         </div>
                             &nbsp;
                         <div className="form-group">
-                            <input type='text' id="phone" className="form-control" placeholder="Phone Number"></input>
+                            <input type='text' id="contact_number" className="form-control" placeholder="Contact Number"></input>
                         </div>
                             &nbsp;
                         <div className="form-group">
@@ -161,7 +165,7 @@ const Order = () => {
                                     Choose Payment Type
                             </label>
                             &nbsp;
-                            <select name="payment-method" id="payment">
+                            <select name="payment-method" id="payment_type">
                                 <option value="Bkash">Bkash</option>
                                 <option value="Rocket">Rocket</option>
                                 <option value="Cash On Delivery">Cash On Delivery</option>

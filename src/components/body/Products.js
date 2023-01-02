@@ -53,9 +53,10 @@ const Product = () => {
                 'product': e.name,
                 'image': e.img,
                 'price': e.price,
-                'get_add_ones': myArray.current,
+                'add_ons': myArray.current,
                 'quantity': 1
             })
+           
         } else {
             alert('This item already added in the cart')
         }
@@ -85,13 +86,13 @@ const Product = () => {
                                     <h5 className="card-title">{item.name}</h5>
                                     <p className="card-text">Price: ${item.price}</p>
                                     <div className='checkBox'>
-                                        {item.addons.map((getAddons, index) => {
+                                        {item.add_ons.map((add_ons, index) => {
                                             return (
                                                 <div key={index} className='form-check form-check-inline'>
                                                     <input className='form-check-input'
-                                                           onClick={CheckBoxHandler} type='checkbox' value={getAddons}
+                                                           onClick={CheckBoxHandler} type='checkbox' value={add_ons}
                                                     />
-                                                    <label htmlFor='inlineCheckbox'>{getAddons}</label>
+                                                    <label htmlFor='inlineCheckbox'>{add_ons}</label>
                                                 </div>
                                             )
                                         })}
