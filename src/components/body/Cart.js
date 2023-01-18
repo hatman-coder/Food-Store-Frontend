@@ -1,10 +1,13 @@
-import React, {useEffect, useState} from "react";
+import axios from "axios";
+import React, {useEffect, useRef, useState} from "react";
 import './style/cart.css'
 
 
 const Cart = () => {
 
     const [data, setData] = useState([])
+    const [category, setCategory] = useState([])
+    
 
 
     const renderHtml = () => {
@@ -29,6 +32,7 @@ const Cart = () => {
                             <th scope="col">Image</th>
                             <th scope="col">Name</th>
                             <th scope="col">Price</th>
+                            <th scope="col">AddOns</th>
                             <th scope="col">Item</th>
                             <th scope="col">Quantity</th>
                             <th scope="col">Total</th>
@@ -36,6 +40,7 @@ const Cart = () => {
                         </tr>
                         </thead>
                         {data.map((item, index) => {
+
                                 return (
                                     <tbody key={index}>
                                     <tr>
@@ -49,10 +54,14 @@ const Cart = () => {
                                         <td id="price">
                                             {item.price}
                                         </td>
-
+                                        <td>
+                                            {item.category}
+                                        </td>
                                         <td>
                                             <p>{item.quantity}</p>
                                         </td>
+
+                                    
 
                                         <td>
                                             <button id="minus" className="btn1" onClick={() => MinusHandle(item.id)}>
@@ -159,9 +168,17 @@ const Cart = () => {
             let get_data = JSON.parse(localStorage.getItem("my_cart_values"))
             if (get_data) {
                 setData(get_data)
+                axios.get('http://127.0.0.1:8000/addOns/').
+                then((res) => 
+                {
+                    setCategory(res.data) 
+                     
+                })
+               
             } else {
                 console.log('else', data)
             }
+         
 
         }
     }, [])
@@ -170,6 +187,7 @@ const Cart = () => {
     return (
         <div className="container">
             {renderHtml()}
+            
         </div>
     )
 }

@@ -9,6 +9,7 @@ const Product = () => {
     const [error, setError] = useState('')
     const myArray = useRef([])
 
+
     const loadAllProducts = () => {
         axios.get('http://127.0.0.1:8000/product/').then((res) => {
             if (res.error) {
@@ -19,6 +20,7 @@ const Product = () => {
             }
 
         })
+
     }
 
     useEffect(() => {
@@ -27,10 +29,11 @@ const Product = () => {
     }, [])
 
 
-    const CheckBoxHandler = (e) => {
-        myArray.current.push(e.target.value)
+    // const CheckBoxHandler = (e) => {
+    //     myArray.current.push(e.target.value)
 
-    }
+    // }
+
 
 
     const ButtonHandler = (e) => {
@@ -54,7 +57,8 @@ const Product = () => {
                 'image': e.img,
                 'price': e.price,
                 'add_ons': myArray.current,
-                'quantity': 1
+                'quantity': 1,
+                'category' : e.category
             })
            
         } else {
@@ -62,7 +66,6 @@ const Product = () => {
         }
 
         localStorage.setItem("my_cart_values", JSON.stringify(existing_items))
-
 
         myArray.current.splice(0, myArray.current.length)
         let get_checked_items = document.getElementsByClassName('form-check-input')
@@ -84,23 +87,28 @@ const Product = () => {
                                 <img className="card-img-top" src={item.img} alt="Unavailable"/>
                                 <div className="card-body transbox">
                                     <h5 className="card-title">{item.name}</h5>
+                                    <br></br>
                                     <p className="card-text">Price: ${item.price}</p>
-                                    <div className='checkBox'>
-                                        {item.add_ons.map((add_ons, index) => {
-                                            return (
-                                                <div key={index} className='form-check form-check-inline'>
-                                                    <input className='form-check-input'
-                                                           onClick={CheckBoxHandler} type='checkbox' value={add_ons}
-                                                    />
-                                                    <label htmlFor='inlineCheckbox'>{add_ons}</label>
-                                                </div>
-                                            )
-                                        })}
-                                    </div>
-                                    <br></br>
-                                    <br></br>
+
+                                    {/* <div className='checkBox' id="category" value={item.category}>
+                                        <label htmlFor='inlineCheckbox'>{CategoryHandler}
+                                            </label>
+
+                                    </div> */}
+    
+                                       
+                                         {/* <div  className='form-check form-check-inline'>
+                                          <input className='form-check-input'
+                                                    onClick={CheckBoxHandler} type='checkbox' 
+                                             /> 
+                                            </div>
+                                                 <label htmlFor='inlineCheckbox'>{CategoryHandler}</label> */}
+                                         
+                                     <br></br>            
                                     <div className='card-footer border-top-0'>
-                                        <button className="myButton" onClick={() => ButtonHandler(item)}>
+                                        <button className="myButton" onClick={() => {
+                                            ButtonHandler(item)
+                                        }}>
                                             Add to Cart
                                         </button>
                                     </div>
