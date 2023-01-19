@@ -1,13 +1,16 @@
 import React, {useEffect, useRef, useState} from "react";
 import axios from "axios";
 import './style/style.css'
+import Cart from "./Cart";
 
 
 const Product = () => {
 
     const [data, setData] = useState([])
+    const[addOns, setAddOns] = useState([])
     const [error, setError] = useState('')
     const myArray = useRef([])
+    const add_ons = useRef([])
 
 
     const loadAllProducts = () => {
@@ -19,6 +22,11 @@ const Product = () => {
                 setData(res.data)
             }
 
+        })
+        axios.get('http://127.0.0.1:8000/addOns/').
+        then((res) => {
+            setAddOns(res.data)
+            // localStorage.setItem('addOns', JSON.stringify(res.data))
         })
 
     }
@@ -33,12 +41,12 @@ const Product = () => {
     //     myArray.current.push(e.target.value)
 
     // }
-
+  
 
 
     const ButtonHandler = (e) => {
-        // console.log({id: e.id, product: e.name, get_add_ones: myArray.current.join(',')})
-
+  
+        <Cart addOns={addOns}/>
         let existing = localStorage.getItem("my_cart_values")
         let existing_items
 
@@ -50,16 +58,22 @@ const Product = () => {
         }
 
         if (!existing_items.some(item => item.id === e.id)) {
+      
+            let filtereCategory = addOns.filter(item => item.category == e.category)
 
-            existing_items.push({
+             existing_items.push({
                 'id': e.id,
                 'product': e.name,
                 'image': e.img,
                 'price': e.price,
-                'add_ons': myArray.current,
+                'add_ons': filtereCategory.map(item => item.add_ons),
+                'add_ons_price': filtereCategory.map(item => item.price),
                 'quantity': 1,
                 'category' : e.category
+                
             })
+            
+
            
         } else {
             alert('This item already added in the cart')
@@ -103,7 +117,6 @@ const Product = () => {
                                              /> 
                                             </div>
                                                  <label htmlFor='inlineCheckbox'>{CategoryHandler}</label> */}
-                                         
                                      <br></br>            
                                     <div className='card-footer border-top-0'>
                                         <button className="myButton" onClick={() => {

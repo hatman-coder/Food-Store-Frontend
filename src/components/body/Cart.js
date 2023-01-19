@@ -3,10 +3,11 @@ import React, {useEffect, useRef, useState} from "react";
 import './style/cart.css'
 
 
-const Cart = () => {
+const Cart = (addOns) => {
 
     const [data, setData] = useState([])
     const [category, setCategory] = useState([])
+    const [add_ons, setAdd_ons] = useState([])
     
 
 
@@ -24,6 +25,7 @@ const Cart = () => {
                 </div>
             )
         } else {
+          
             return (
                 <div className='container'>
                     <table className="table">
@@ -55,7 +57,10 @@ const Cart = () => {
                                             {item.price}
                                         </td>
                                         <td>
-                                            {item.category}
+                                            <div  className='form-check form-check-inline'>
+                                                <input className='form-check-input' type='checkbox'/> 
+                                            </div>
+                                            <label htmlFor='inlineCheckbox'>{item.add_ons}</label>
                                         </td>
                                         <td>
                                             <p>{item.quantity}</p>
