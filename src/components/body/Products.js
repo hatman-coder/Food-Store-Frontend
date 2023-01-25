@@ -9,6 +9,7 @@ const Product = () => {
     const [data, setData] = useState([])
     const[addOns, setAddOns] = useState([])
     const [error, setError] = useState('')
+    const [result, setResult] = useState([])
     const myArray = useRef([])
     const add_ons = useRef([])
 
@@ -20,15 +21,32 @@ const Product = () => {
                 console.log(error)
             } else {
                 setData(res.data)
+                localStorage.setItem('product', JSON.stringify(res.data))
             }
 
         })
         axios.get('http://127.0.0.1:8000/addOns/').
         then((res) => {
             setAddOns(res.data)
-            // localStorage.setItem('addOns', JSON.stringify(res.data))
+        
+            localStorage.setItem('addOns', JSON.stringify(res.data))
+
+            let filterCategory = addOns.map(a => {
+                let b = data.find(x => x.category === a.category)
+                return {...a, ...b}
+            })
+
+            // let filtereCategory = [...new Set([...addOns, ...data])]
+
+            // let filterCategory = addOns.reduce((acc, val) => {
+            //     let match = data.find(x => x.category === val.category)
+            //     acc.push(Object.assign({}, val, match))
+            //     return acc
+            // }, [])
+            console.log('results', filterCategory)
         })
 
+        
     }
 
     useEffect(() => {
@@ -59,15 +77,15 @@ const Product = () => {
 
         if (!existing_items.some(item => item.id === e.id)) {
       
-            let filtereCategory = addOns.filter(item => item.category == e.category)
+            
 
              existing_items.push({
                 'id': e.id,
                 'product': e.name,
                 'image': e.img,
                 'price': e.price,
-                'add_ons': filtereCategory.map(item => item.add_ons),
-                'add_ons_price': filtereCategory.map(item => item.price),
+                // 'add_ons': filtereCategory.map(item => item.add_ons),
+                // 'add_ons_price': filtereCategory.map(item => item.price),
                 'quantity': 1,
                 'category' : e.category
                 
@@ -94,6 +112,9 @@ const Product = () => {
         <div className='container divBody'>
             <div className='row justify-content-md-center'>
                 {data.map((item, index) => {
+                    let x = []
+                    x.push(addOns.map(item => item.category) == item.category)
+
                     return (
                         <div key={index}
                              className='col-lg-4 col-md-6 col-sm-12 col-xs-12 align-self-center text-center d-flex justify-content-center'>
@@ -111,12 +132,12 @@ const Product = () => {
                                     </div> */}
     
                                        
-                                         {/* <div  className='form-check form-check-inline'>
+                                         <div  className='form-check form-check-inline'>
                                           <input className='form-check-input'
-                                                    onClick={CheckBoxHandler} type='checkbox' 
+                                                 type='checkbox' 
                                              /> 
                                             </div>
-                                                 <label htmlFor='inlineCheckbox'>{CategoryHandler}</label> */}
+                                                 <label htmlFor='inlineCheckbox'>{x.map(item => item.add_ons)}</label>
                                      <br></br>            
                                     <div className='card-footer border-top-0'>
                                         <button className="myButton" onClick={() => {
